@@ -1,0 +1,60 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    Portfolio
+{% endblock %}
+
+{% block main %}
+    <h1>Portfolio</h1>
+    <table>
+        <thead>
+            <tr>
+                <th>Symbol</th>
+                <th>#</th>
+                <th>Avg Cost</th>
+                <th>Cost Basis</th>
+                <th>Share Price</th>
+                <th>Total Value</th>
+                <th>P/L</th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for stock in stocks %}
+                <tr>
+                    <td>{{ stock.symbol }}</td>
+                    <td>{{ stock.total_shares }}</td>
+                    <td>${{'%0.2f' % stock.avg_price }}</td>
+                    <td>${{'%0.2f' % stock.total_cost }}</td>
+                    <td>${{'%0.2f' % stock.share_price }}</td>
+                    <td>${{'%0.2f' % stock.total_value }}</td>
+                    <td>${{'%0.2f' % stock.profit_loss }}</td>
+                    <td>
+                        <form action="/buy" method="post">
+                            <input type="hidden" name="symbol" value={{ stock.symbol }}>
+                            <input class="form-control mx-auto w-auto" type="number" min="1" id="shares" name="shares" autocomplete="off" placeholder="Shares">
+                            <button class="btn btn-primary" type="submit">Buy Now</button>
+                        </form>
+                    </td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    <br>
+    <table>
+        <thead>
+            <tr>
+                <th>Total Assets</th>
+                <th>Cash</th>
+                <th>Grand Total</th>
+            </tr>
+        </thead>
+        <tbody>
+            <td>${{'%0.2f' % user.total_assets }}</td>
+            <td>${{'%0.2f' % user.cash }}</td>
+            <td>${{'%0.2f' % user.grand_total }}</td>
+        </tbody>
+    </table>
+
+
+{% endblock %}

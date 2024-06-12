@@ -1,0 +1,25 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    {{ quote['symbol'] }}
+{% endblock %}
+
+{% block main %}
+    <div>
+        <table>
+            <thead>
+                <tr>
+                    <th>Symbol</th>
+                    <th>Price</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>{{ quote['symbol'] }}</td>
+                    <td>{{ quote['price'] | usd}}</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+{% endblock %}
+
